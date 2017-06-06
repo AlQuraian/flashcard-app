@@ -1,5 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
+import { addDeck, showAddDeck, hideAddDeck } from '../actions';
+
+
+// const mapStatetToProps = state => {
+//   return {
+//     decks: state.decks,
+//     addingDeck: state.addingDeck
+//   };
+// };
+
+// same as the above, thanks to destructoring and short property naming
+const mapStatetToProps = ({ decks, addingDeck }) => ({ decks, addingDeck });
+
+const mapDispatchToProps = dispatch => ({
+  addDeck: name => dispatch(addDeck(name)),
+  showAddDeck: () => dispatch(showAddDeck()),
+  hideAddDeck: () => dispatch(hideAddDeck())
+});
 
 const Sidebar = React.createClass({
   componentDidUpdate() {
@@ -29,4 +48,4 @@ const Sidebar = React.createClass({
   }
 });
 
-export default Sidebar;
+export default connect(mapStatetToProps, mapDispatchToProps)(Sidebar);
