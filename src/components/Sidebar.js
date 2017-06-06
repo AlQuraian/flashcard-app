@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import { addDeck, showAddDeck, hideAddDeck } from '../actions';
 
 
@@ -34,7 +35,9 @@ const Sidebar = React.createClass({
         <button onClick={this.props.showAddDeck}>New Deck</button>
         <ul>
           {this.props.decks.map((deck, i) =>
-            <li key={i}>{deck.name}</li>
+            <li key={i}>
+              <Link to={`/deck/${deck.id}`}>{deck.name}</Link>
+            </li>
           )}
         </ul>
         {this.props.addingDeck && <input ref="add" onKeyPress={this.createDeck} />}
